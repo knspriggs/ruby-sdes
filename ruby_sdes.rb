@@ -18,10 +18,6 @@ $s0Table = [1, 0, 3, 2, 3, 2, 1, 0, 0, 2, 1, 3, 3, 1, 3, 2]
 $s1Table = [0, 1, 2, 3, 2, 0, 1, 3, 3, 0, 1, 0, 2, 1, 0, 3]
 $p4Table = [2, 4, 3, 1]
 
-def keyLength
-  10
-end
-
 def perm(inputByte, permTable)
   outputByte = 0
   permTable.each_with_index do |element, index|
@@ -48,7 +44,7 @@ end
 
 def leftShift(key)
   tmp = []
-  for ind in 1..keyLength
+  for ind in 1..$keyLength
     tmp.push(key[ind.modulo 10])
   end
   return tmp
@@ -100,6 +96,6 @@ end
 
 
 if __FILE__ == $0
-  puts encrypt(~0b0000000000, ~0b10101010).to_s(2) # 0b00010001
-  puts decrypt(~0b0000000000, 0b00010001).to_s(2) # 0b10101010
+  puts "Encrypt #{0b10101010.to_s(2)} with k=#{0b0000000000.to_s(2)}" + encrypt(0b0000000000, 0b10101010).to_s(2) # 0b00010001
+  puts "Decrypt #{0b00010001.to_s(2)} with k=#{0b0000000000.to_s(2)}" + decrypt(0b0000000000, 0b00010001).to_s(2) # 0b10101010
 end
